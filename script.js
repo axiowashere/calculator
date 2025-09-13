@@ -8,10 +8,21 @@ let rawNum = "";
 let firstNum = null;
 let secondNum = null;
 let operator = null;
+let badEval = false;
 
 function updateDisplay(){
     console.log("I was here!")
-    outputText.textContent = (rawNum == 0) ? 0 : rawNum;
+    let textOut = (rawNum==0) ? 0 : rawNum;
+    if (textOut > (10**34)){
+        badEval = true;
+        outputText.textContent = "ERROR";
+        return;
+    }
+    textOut = (Math.round(textOut * 100000000)/100000000).toString(); 
+    if (textOut.length > 10){
+        textOut = textOut.substring(0, 2)/10 + `+e${textOut.length-1}`
+    }
+    outputText.textContent = textOut;
 }
 
 function evaluate(a, b, operator){
@@ -33,6 +44,7 @@ function evaluate(a, b, operator){
 
 // functions
 function inputNumber(number){
+    if (badEval) return;
     console.log(number);
     if (rawNum.length < 10){
         rawNum += number;
@@ -41,10 +53,17 @@ function inputNumber(number){
 }
 
 function inputOperator(op){
+    if (badEval) return;
     if (firstNum != null && operator != null && rawNum != ""){
         secondNum = parseInt(rawNum)
+        if (secondNum === 0 && operator == '/'){
+            rawNum = 'ERROR';
+            updateDisplay();
+            badEval = true;
+            return;
+        }
         rawNum = evaluate(firstNum, secondNum, operator);
-        updateDisplay(rawNum);
+        updateDisplay();
     }
     operator = op;
     if (rawNum != ""){
@@ -59,6 +78,7 @@ function clearInputs(){
     firstNum = null
     secondNum = null
     rawNum = ""
+    badEval = false;
     updateDisplay();
 }
 
@@ -94,7 +114,7 @@ numPad.addEventListener("click", function(hit){
             inputNumber(9);
             break;
         case 'zero':
-            inputNumber(10);
+            inputNumber(0);
             break;
     }
 });
@@ -117,11 +137,18 @@ operatorPad.addEventListener("click", function(hit){
             clearInputs();
             break;
         case 'equals':
-            if (firstNum != null && rawNum != null && operator != null){
+            if (firstNum != null && rawNum != null && operator != null && (!badEval)){
                 secondNum = (Number.isInteger(parseInt(rawNum))) ? rawNum : firstNum;
+                if (parseInt(secondNum)=== 0 && operator == '/'){
+                    console.log("hit!");
+                    rawNum = 'ERROR';
+                    updateDisplay();
+                    badEval = true;
+                    break;
+                }
                 rawNum = evaluate(firstNum, parseInt(secondNum), operator);
                 operator = null;
-                updateDisplay(rawNum);
+                updateDisplay();
                 firstNum = parseInt(rawNum);
                 rawNum = "";
             }
