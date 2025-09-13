@@ -1,0 +1,78 @@
+h1 {
+    justify-self: center;
+}
+
+p {
+    justify-self: center;
+}
+
+.main-container{
+    justify-self: center;
+    width: 400px;
+    height: 500px;
+    margin: 32px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    background-color: darkgray;
+    border-radius: 8px;
+}
+
+.output-container{
+    flex-grow: 1;
+    height: 100px;
+    border: 2px solid lightslategray;
+    background-color: white;
+    border-radius: 8px;
+    margin: 8px 16px;
+}
+
+.interface-container{
+    flex-grow: 2;
+    display: flex;
+    margin: 8px 16px;
+    gap: 16px;
+}
+
+.numpad{
+    display: flex;
+    justify-content: center;
+    flex-direction: row-reverse;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.operators{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.operator{
+    flex-grow: 1;
+    padding: 32px;
+    background-color: lightslategray;
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.digit{
+    flex-grow: 1;
+    aspect-ratio: 1/1;
+    display: flex;
+    min-height: 32px;
+    min-width: 32px;
+    padding: 32px;
+    justify-content: center;
+    align-items: center;
+    background-color: lightslategray;
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.digit#zero{
+    aspect-ratio: auto;
+    flex-grow: 1;
+}
