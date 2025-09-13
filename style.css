@@ -9,7 +9,7 @@ p {
 .main-container{
     justify-self: center;
     width: 400px;
-    height: 500px;
+    height: 550px;
     margin: 32px;
     padding: 16px;
     display: flex;
@@ -19,12 +19,20 @@ p {
 }
 
 .output-container{
+    display: flex;
     flex-grow: 1;
-    height: 100px;
+    min-height: 100px;
     border: 2px solid lightslategray;
     background-color: white;
     border-radius: 8px;
     margin: 8px 16px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 60px;
+    text-align: center;
+    align-items: center;
+    flex-direction: row-reverse;
+    box-sizing: border-box;
+    padding: 16px;
 }
 
 .interface-container{
@@ -50,20 +58,24 @@ p {
 
 .operator{
     flex-grow: 1;
-    padding: 32px;
+    padding: 18px;
     background-color: lightslategray;
     border-radius: 8px;
     font-size: 18px;
     font-weight: 700;
 }
 
+.operator#clear{
+    padding: 4px 32px;
+}
+
 .digit{
     flex-grow: 1;
     aspect-ratio: 1/1;
     display: flex;
-    min-height: 32px;
-    min-width: 32px;
-    padding: 32px;
+    min-height: 24px;
+    min-width: 24px;
+    padding: 24px;
     justify-content: center;
     align-items: center;
     background-color: lightslategray;
